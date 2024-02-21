@@ -8,6 +8,13 @@ const config: Config = {
   ],
   theme: {
     extend: {
+       colors: {
+        primary: '#277931', 
+        secondary: '#8E8E8E', 
+      },
+      animation: {
+        'spin-slow': 'spin 90s linear infinite',
+      },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
         "gradient-conic":
