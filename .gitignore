@@ -39,3 +39,5 @@ next-env.d.ts
 /settings.json
 
 .env
+
+.vercel
