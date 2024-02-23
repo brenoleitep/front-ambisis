@@ -1,6 +1,0 @@
-{
-  "databaseURL": "https://Breno-Leite-s-workspace-7r6lem.us-east-1.xata.sh/db/auth-ambisis",
-  "codegen": {
-    "output": "src/xata.ts"
-  }
-}
