@@ -37,7 +37,6 @@ export const LoginForm = () => {
   const router = useRouter();
 
   const handleSubmitForm = async (data: FormValues) => {
-    console.log(data)
 
     try {
       setIsLoading(true)
