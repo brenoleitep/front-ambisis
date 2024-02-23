@@ -84,7 +84,7 @@ export const LoginForm = () => {
               aria-label="toggle password visibility"
               onClick={togglePasswordVisibility}
               edge="end"
-              className='text-xs text-secondary'
+              className='text-[8px] text-secondary'
               >
              {!showPassword ? (
                "Mostrar"
