@@ -22,15 +22,13 @@ export default function RootLayout({
   const pathName = usePathname();
   const isPublicPage = checkIsPublicRoute(pathName!);
 
-  console.log(isPublicPage)
-
   return (
     <html lang="en">
-      <body className={inter.className}>
-          <Nav />
+      <body className={`${inter.className}`}>
           {isPublicPage && children}
           {!isPublicPage && (
             <PrivateRoute>
+              <Nav />
               {children}
             </PrivateRoute>
           )}
