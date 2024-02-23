@@ -112,7 +112,7 @@ export const RegisterForm = () => {
           ),
         }}
       />
-      <Button text={"Login"} isLoading={isLoading} />
+      <Button text={"Cadastrar"} isLoading={isLoading} />
     </form>
   );
 };
