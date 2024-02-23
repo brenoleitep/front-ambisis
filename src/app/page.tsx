@@ -1,7 +1,7 @@
 "use client"
-import { Card } from "@/components/Card";
-import { fetchWrapper } from "@/functions/fetch";
-import logoAmbisis from "../../public/logoAmbisis.png";
+// import { Card } from "@/components/Card";
+// import { fetchWrapper } from "@/functions/fetch";
+// import logoAmbisis from "../../public/logoAmbisis.png";
 
 interface Company {
   id: number;
@@ -15,14 +15,14 @@ interface Company {
 }
 
 export default async function Home() {
-  const { data }: { data: Company[] } = await fetchWrapper("/company/listcompany");
+  // const { data }: { data: Company[] } = await fetchWrapper("/company/listcompany");
 
   return (
     <main>
       <div className="flex flex-col gap-6">
         <h2 className="mx-auto mt-3 text-2xl">Todas as empresas</h2>
 
-        {data.map(company => (
+        {/* {data.map(company => (
           <Card 
             key={company.id}
             imageUrl={logoAmbisis} 
@@ -33,7 +33,7 @@ export default async function Home() {
             neighborhood={company.bairro} 
             state={company.estado} 
           />
-        ))}
+        ))} */}
       </div>
     </main>
   );
