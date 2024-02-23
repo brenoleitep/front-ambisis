@@ -1,5 +1,5 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Button, Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
+import { Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -104,9 +104,9 @@ export default function Modal({ cta }: ModalProps) {
 
   return (
     <>
-      <Button variant="outlined" className='uppercase bg-primary p-2 text-white rounded-sm' onClick={handleClickOpen}>
+      <button className='uppercase text-sm bg-primary p-2 text-white rounded-sm' onClick={handleClickOpen}>
         {cta}
-      </Button>
+      </button>
       <Dialog
         open={open}
         onClose={handleClose}
