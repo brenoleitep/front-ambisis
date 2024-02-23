@@ -18,10 +18,10 @@ return (
         <Image src={imageUrl} alt="Card Image" className="h-[111px] w-[111px] absolute top-8 bg-primary rounded-full top-0- left-1/2 transform -translate-x-1/2" width={111} height={111} />
 
       <section className='flex justify-end overflow-auto flex-col h-full mx-auto w-full p-2 text-white'>
-        <h2 className='text-center text-2xl'>{companyName}</h2>
+        <h2 className='text-center p-2 w-full text-2xl'>{companyName}</h2>
         
         <div className='flex w-full flex-col items-end h-[70%]'>
-          <div className='w-full flex p-4 flex-col gap-2 text-xs uppercase justify-between h-[90%]'>
+          <div className='w-full flex p-2 flex-col gap-2 text-xs uppercase justify-between h-[90%]'>
             <div className='flex'>
               <p>CNPJ:</p>
               <p>{cnpj}</p>
@@ -48,16 +48,16 @@ return (
             </div>
           </div>
 
-          <div className='w-full flex p-4 flex-col gap-3 h-[90%] justify-between'>
-            <button className='uppercase bg-white text-primary rounded-sm'>
+          <div className='w-full flex p-2 flex-col gap-3 h-[90%] justify-between'>
+            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
               Criar licença
             </button>
 
-            <button className='uppercase bg-white text-primary rounded-sm'>
+            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
               Editar empresa
             </button>
 
-            <button className='uppercase bg-white text-primary rounded-sm'>
+            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
               ver licença
             </button>
           </div>
