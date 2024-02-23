@@ -1,9 +1,8 @@
 'use client'
 
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Visibility, VisibilityOff } from '@mui/icons-material';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
-import { MouseEvent, useState } from 'react';
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Button from './Button';
@@ -18,13 +17,12 @@ interface FormValues {
 }
 
 export const LoginForm = () => {
+
   const [showPassword, setShowPassword] = useState(false);
 
-  const handleClickShowPassword = () => setShowPassword((show) => !show);
-
-  const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
-  event.preventDefault();
-};
+  const togglePasswordVisibility = () => {
+    setShowPassword((prev) => !prev);
+  };
   const {handleSubmit, register, formState: {errors}} = useForm({
     mode: "all",
     criteriaMode: "all",
@@ -67,19 +65,23 @@ export const LoginForm = () => {
         margin="normal"
         required
         InputProps={{
-          endAdornment: (
-            <InputAdornment position="end">
-              <IconButton
-                aria-label="toggle password visibility"
-                onClick={handleClickShowPassword}
-                onMouseDown={handleMouseDownPassword}
-                edge="end"
+        endAdornment: (
+          <InputAdornment position="end">
+            <IconButton
+              aria-label="toggle password visibility"
+              onClick={togglePasswordVisibility}
+              edge="end"
+              className='text-xs text-secondary'
               >
-                {showPassword ? <VisibilityOff /> : <Visibility />}
-              </IconButton>
-            </InputAdornment>
-          ),
-        }}
+             {!showPassword ? (
+               "Mostrar"
+              ) : (
+                "Esconder"
+              )}
+            </IconButton>
+          </InputAdornment>
+        ),
+      }}
       />
         <Button text={"Login"} />
       </form>
