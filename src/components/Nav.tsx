@@ -1,6 +1,6 @@
 import Image from 'next/image';
 import logoAmbisis from '../../public/logoAmbisis.png';
-import Modal from './Modal';
+import CreateCompanyModal from './Modals/CreateCompanyModal/CreateCompanyModal';
 
 export const Nav = () => {
  
@@ -12,7 +12,7 @@ export const Nav = () => {
             <Image src={logoAmbisis} width={100} alt='Logo Ambisis' />
           </a>  
         </div>
-        <Modal cta={"Criar empresa"} />
+        <CreateCompanyModal cta={"Criar empresa"} />
       </nav>
     </header>
   )

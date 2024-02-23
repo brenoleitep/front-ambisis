@@ -1,9 +1,11 @@
+import { normalizes } from '@/utils/normalizes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useCreateCompanyModal } from './useCreateCompanyModal';
 
 interface Field {
   id: string;
@@ -23,39 +25,14 @@ const schema = z.object({
   complemento: z.string().optional(),
 });
 
-const normalizeCnpjNumber = (value: String | undefined) => {
-    if (!value) return ''
-    
-    return value.replace(/[\D]/g, '')
-        .replace(/(\d{2})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1.$2')
-        .replace(/(\d{3})(\d)/, '$1/$2')
-        .replace(/(\d{4})(\d)/, '$1-$2')
-        .replace(/(-\d{2})\d+?$/, '$1')
-}
-
-const normalizeCepNumber = (value: String | undefined) => {
-    if (!value) return ''
-    return value.replace(/\D/g, "")
-    .replace(/^(\d{5})(\d{3})+?$/, "$1-$2")
-    .replace(/(-\d{3})(\d+?)/, '$1')    
-}
-
 interface ModalProps {
   cta: string;
 }
 
 export default function Modal({ cta }: ModalProps) {
-  const [open, setOpen] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const {handleClickOpen, handleClose, open} = useCreateCompanyModal();
+  const {normalizeCepNumber, normalizeCnpjNumber} = normalizes();
 
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
 
   const { handleSubmit, formState: { errors }, register, watch, setValue} = useForm({
     mode: "all",
@@ -84,9 +61,7 @@ export default function Modal({ cta }: ModalProps) {
   },[cepValue])
 
   const handleSubmitForm = async (data: Record<string, string>) => {
-    
     try {
-      setIsLoading(true);
       const token = localStorage.getItem('@userToken');
       const config = {
         headers: {
@@ -94,11 +69,11 @@ export default function Modal({ cta }: ModalProps) {
         },
       };
       const response = await axios.post('https://api-ambisis.onrender.com/api/company/createCompany', data, config);
-      handleClose()
+      
+      if(response.status === 201) handleClose();
     } catch (error) {
       console.log('Erro de validação:', error);
     } finally {
-      setIsLoading(false);
     }
   };
 
