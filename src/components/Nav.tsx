@@ -3,8 +3,6 @@ import Image from 'next/image';
 import logoAmbisis from '../../public/logoAmbisis.png';
 
 export const Nav = () => {
-
-
   return (
     <header> 
       <nav className="flex items-center justify-between p-6 h-20 border border-t-0 border-l-0 border-b-gray-600" aria-label="Global">
