@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { z } from 'zod';
 import Button from './Button';
+
 const schema = z.object({
   email: z.string().email('Email inválido').min(6, 'Email muito curto').max(100, 'Email muito longo'),
   password: z.string().min(6, 'Senha deve ter no mínimo 6 caracteres').max(20, 'Senha deve ter no máximo 20 caracteres'),

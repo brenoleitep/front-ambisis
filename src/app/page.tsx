@@ -1,5 +1,4 @@
 import { LoginForm } from "@/components/LoginForm";
-import TopImage from "@/components/TopImage";
 import Image from "next/image";
 import Link from "next/link";
 import logoAmbisis from './../../public/logoAmbisis.png';
@@ -8,7 +7,7 @@ const Login = () => {
 
   return (
     <div className="h-screen gap-6 container flex flex-col justify-center items-center mx-auto">
-      <TopImage />
+      {/* <TopImage /> */}
       <Image src={logoAmbisis} alt="Ambisis" />
       
       <LoginForm />
