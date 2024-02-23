@@ -1,8 +1,23 @@
+import { LoginForm } from "@/components/LoginForm";
+import TopImage from "@/components/TopImage";
+import Image from "next/image";
+import Link from "next/link";
+import logoAmbisis from './../../public/logoAmbisis.png';
 
-export default function Home() {
+const Login = () => {
+
   return (
-    <main>
-     
-    </main>
-  );
+    <div className="h-screen gap-6 container flex flex-col justify-center items-center mx-auto">
+      <TopImage />
+      <Image src={logoAmbisis} alt="Ambisis" />
+      
+      <LoginForm />
+
+      <Link href={"/cadastro"} className="text-secondary">
+        Não possui conta? <span className="text-primary">Cadastre-se</span>
+      </Link>
+    </div>
+  )
 }
+
+export default Login
