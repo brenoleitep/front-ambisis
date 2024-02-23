@@ -5,7 +5,9 @@ import axios from 'axios';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { z } from 'zod';
+
 import Button from './Button';
 
 const schema = z.object({
@@ -100,12 +102,12 @@ export const RegisterForm = () => {
                 aria-label="toggle password visibility"
                 onClick={togglePasswordVisibility}
                 edge="end"
-                className='text-[8px] text-secondary'
+                className='text-secondary'
               >
                 {!showPassword ? (
-                  "Mostrar"
-                ) : (
-                  "Esconder"
+                <FaEye />
+              ) : (
+                <FaEyeSlash />
                 )}
               </IconButton>
             </InputAdornment>
