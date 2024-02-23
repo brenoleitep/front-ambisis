@@ -1,24 +1,25 @@
 'use client'
-
 import { zodResolver } from '@hookform/resolvers/zod';
 import { IconButton, InputAdornment, TextField } from '@mui/material';
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import Button from './Button';
 const schema = z.object({
-  userEmail: z.string().email('Email inválido').min(6, 'Email muito curto').max(100, 'Email muito longo'),
-  userPassword: z.string().min(6, 'Senha deve ter no mínimo 6 caracteres').max(20, 'Senha deve ter no máximo 20 caracteres'),
+  email: z.string().email('Email inválido').min(6, 'Email muito curto').max(100, 'Email muito longo'),
+  password: z.string().min(6, 'Senha deve ter no mínimo 6 caracteres').max(20, 'Senha deve ter no máximo 20 caracteres'),
 });
 
 interface FormValues {
-  userEmail: string;
-  userPassword: string;
+  email: string;
+  password: string;
 }
 
 export const LoginForm = () => {
-
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prev) => !prev);
@@ -28,36 +29,49 @@ export const LoginForm = () => {
     criteriaMode: "all",
     resolver: zodResolver(schema),
     defaultValues: {
-      userEmail: '',
-      userPassword: ''
+      email: '',
+      password: ''
     }
   })
 
-  const handleSubmitForm = (data: FormValues) => {
+  const router = useRouter();
+
+  const handleSubmitForm = async (data: FormValues) => {
     console.log(data)
-  }
+
+    try {
+      setIsLoading(true)
+      const response = await axios.post('https://api-ambisis.onrender.com/api/auth/login', data);
+      localStorage.setItem('@userToken', response.data.token);
+      router.push('/dashboard')
+    } catch (error) {
+      console.log('Erro ao enviar os dados:', error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <>
       <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col gap-5 w-[80%]">
         
         <TextField 
-        id="userEmail" 
+        id="email" 
         className='h-[65px] max-w-[343px]' 
         label="Email" 
         variant="outlined" 
-        {...register('userEmail')} 
-        error={!!errors.userEmail} 
-        helperText={errors.userEmail?.message} 
+        {...register('email')} 
+        error={!!errors.email} 
+        helperText={errors.email?.message} 
         required
         />
 
       <TextField
-        id="userPassword"
+        id="password"
         label="Senha"
-        {...register('userPassword')} 
-        error={!!errors.userPassword} 
-        helperText={errors.userPassword?.message} 
+        {...register('password')} 
+        error={!!errors.password} 
+        helperText={errors.password?.message} 
         type={showPassword ? 'text' : 'password'}
         className='h-[65px] max-w-[343px]' 
         variant="outlined"
@@ -83,7 +97,7 @@ export const LoginForm = () => {
         ),
       }}
       />
-        <Button text={"Login"} />
+        <Button text={"Login"} isLoading={isLoading}/>
       </form>
     </>
   )
