@@ -20,10 +20,10 @@ interface ModalProps {
 }
 
 export default function CreateLicenceModal({ cta }: ModalProps) {
-  const { handleClickOpen, handleClose, open, companies, isLoading, handleSubmitForm } = useCreateLicenceModal();
+  const { handleClickOpen, handleClose, setShouldResetForm, shouldResetForm, open, companies, isLoading, handleSubmitForm } = useCreateLicenceModal();
   const {normalizeDate} = normalizes();
 
-  const { handleSubmit, formState: { errors }, register, setValue, watch } = useForm({
+  const { handleSubmit, formState: { errors }, register, reset, setValue, watch } = useForm({
     mode: "all",
     criteriaMode: "all",
     resolver: zodResolver(schema),
@@ -42,6 +42,13 @@ export default function CreateLicenceModal({ cta }: ModalProps) {
     const normalizedValidade = normalizeDate(validadeValue);
     setValue("validade", normalizedValidade);
   }, [validadeValue]);
+
+    useEffect(() => {
+    if (shouldResetForm) {
+      reset(); 
+      setShouldResetForm(false); 
+    }
+  }, [shouldResetForm, reset]);
 
   return (
     <>

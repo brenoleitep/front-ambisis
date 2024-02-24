@@ -1,11 +1,15 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { useForm } from 'react-hook-form';
+
 
 export const useCreateLicenceModal = () => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [companies, setCompanies] = useState([]);
-  
+  const [shouldResetForm, setShouldResetForm] = useState(false);
+
+  const {reset} = useForm();
     const token = localStorage.getItem('@userToken');
       const config = {
         headers: {
@@ -39,7 +43,6 @@ export const useCreateLicenceModal = () => {
   };
 
   const handleSubmitForm = async (data: any) => {
-      console.log("brene", data)
         data.empresaId = parseInt(data.empresaId);
         data.emissao = normalizeDateWithDash(data.emissao);
         data.validade = normalizeDateWithDash(data.validade);
@@ -47,9 +50,11 @@ export const useCreateLicenceModal = () => {
     try {
       setIsLoading(true);
       
-      console.log(data)
       const response = await axios.post(`https://api-ambisis.onrender.com/api/license/createLicense`, data, config);
-      if(response.status === 201) handleClose();
+      if(response.status === 201) {
+        handleClose()
+        setShouldResetForm(true);
+      };
     } catch (error) {
       console.log('Erro de validação:', error);
     } finally {
@@ -57,5 +62,5 @@ export const useCreateLicenceModal = () => {
     }
   };
 
-  return {handleClickOpen, handleClose, open, isLoading, handleSubmitForm, companies};
+  return {handleClickOpen, handleClose, setShouldResetForm, shouldResetForm, open, isLoading, handleSubmitForm, companies};
 }
