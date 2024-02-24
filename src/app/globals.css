@@ -5,3 +5,8 @@
 body {
   background-color: white;
 }
+
+.date-picker-wrapper {
+  position: relative;
+  z-index: 9999; 
+}

@@ -1,5 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
+import CreateLicenceModal from './Modals/CreateLicenseModal/CreateLicenceModal';
+
 
 interface CardProps {
   imageUrl: string | StaticImageData;
@@ -49,9 +51,8 @@ return (
           </div>
 
           <div className='w-full flex p-2 flex-col gap-3 h-[90%] justify-between'>
-            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
-              Criar licença
-            </button>
+
+            <CreateLicenceModal cta='Criar licença' />
 
             <button className='uppercase p-1 bg-white text-primary rounded-sm'>
               Editar empresa

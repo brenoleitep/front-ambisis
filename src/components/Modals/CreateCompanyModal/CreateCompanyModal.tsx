@@ -7,14 +7,6 @@ import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { z } from 'zod';
 import { useCreateCompanyModal } from './useCreateCompanyModal';
 
-interface Field {
-  id: string;
-  label: string;
-  type: string;
-  required: boolean;
-  validation: any;
-}
-
 const schema = z.object({
   razao_social: z.string().min(3, 'Razão Social muito curta').max(100, 'Razão Social muito longa'),
   cnpj: z.string().min(13, 'CNPJ deve ter 14 dígitos').max(18),
@@ -29,7 +21,7 @@ interface ModalProps {
   cta: string;
 }
 
-export default function Modal({ cta }: ModalProps) {
+export default function CreateCompanyModal({ cta }: ModalProps) {
   const {handleClickOpen, handleClose, open, isLoading, handleSubmitForm} = useCreateCompanyModal();
   const {normalizeCepNumber, normalizeCnpjNumber} = normalizes();
 
@@ -62,7 +54,7 @@ export default function Modal({ cta }: ModalProps) {
 
   return (
     <>
-      <button className='uppercase text-sm bg-primary p-2 text-white rounded-sm' onClick={handleClickOpen}>
+      <button className='uppercase p-1 bg-white text-primary rounded-sm' onClick={handleClickOpen}>
         {cta}
       </button>
       <Dialog
