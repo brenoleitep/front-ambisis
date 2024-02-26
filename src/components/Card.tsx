@@ -1,6 +1,7 @@
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
 import CreateLicenceModal from './Modals/CreateLicenseModal/CreateLicenceModal';
+import DeleteLicenseModal from './Modals/DeleteLicenseModal/DeleteLicenseModal';
 import SeeLicensesModal from './Modals/SeeLicenseModal/SeeLicensesModal';
 
 
@@ -56,9 +57,7 @@ return (
 
             <CreateLicenceModal cta='Criar licença' />
 
-            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
-              Editar empresa
-            </button>
+            <DeleteLicenseModal cta='Deletar empresa' empresaId={companyId}/>
 
             <SeeLicensesModal cta='Ver licenças' empresaId={companyId}/>
           </div>
