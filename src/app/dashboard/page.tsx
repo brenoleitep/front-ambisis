@@ -1,63 +1,29 @@
 'use client'
 import { Card } from "@/components/Card";
-import axios from 'axios';
-import { useEffect, useState } from 'react';
+import CreateCompanyModal from "@/components/Modals/CreateCompanyModal/CreateCompanyModal";
+import SkeletonChildren from "@/components/Skeleton";
+import { useDashboard } from "./useDashboard";
 import logoAmbisis from "/public/logoAmbisis.png";
 
-interface Company {
-  id: number;
-  razao_social: string;
-  cnpj: string;
-  cep: string;
-  cidade: string;
-  estado: string;
-  bairro: string;
-  complemento: string | null;
-}
-
 export default function Home() {
-  const [companies, setCompanies] = useState<Company[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const token = localStorage.getItem('@userToken');
-        if (!token) {
-          throw new Error('Token de autenticação não encontrado.');
-        }
-        const response = await axios.get('https://api-ambisis.onrender.com/api/company/listcompany', {
-          headers: {
-            Authorization: `${token}`
-          }
-        });
-        
-        console.log(response.data)
-        setCompanies(response.data.data);
-        setIsLoading(false);
-        console.log(response.data)
-      } catch (error) {
-        setError('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
-        setIsLoading(false);
-      }
-    };
-
-    fetchData();
-  }, []);
-
+  const { companies, error, isLoading } = useDashboard();
 
   return (
-    <main>
+    <main className="min-h-[100vh]">
       <div className="flex flex-col gap-6">
-        <h2 className="mx-auto mt-3 text-2xl">Todas as empresas</h2>
 
         {isLoading ? (
-          <p>Carregando...</p>
-        ) : error ? (
-          <p>{error}</p>
+          <SkeletonChildren />
+        ) : companies.length === 0 ? (
+          <div className="mx-auto gap-2 h-[90vh] flex flex-col justify-center items-center">
+          <h2 className="uppercase text-primary">Você ainda não criou nenhuma empresa!</h2>
+          <CreateCompanyModal cta="Criar empresa" />
+          </div>
         ) : (
-          companies?.map(company => (
+          <>
+        <h2 className="mx-auto mt-3 text-2xl">Todas as empresas</h2>
+
+          {companies?.map(company => (
              <Card 
               key={company?.id}
               imageUrl={logoAmbisis} 
@@ -67,9 +33,13 @@ export default function Home() {
               razao={company?.razao_social}
               neighborhood={company?.bairro} 
               state={company?.estado} 
+              companyId={company?.id}
             />
-          ))
-        )}
+            ))
+          }
+          </>
+        )
+        }
       </div>
     </main>
   );

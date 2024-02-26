@@ -1,5 +1,9 @@
 import Image, { StaticImageData } from 'next/image';
 import React from 'react';
+import CreateLicenceModal from './Modals/CreateLicenseModal/CreateLicenceModal';
+import DeleteLicenseModal from './Modals/DeleteLicenseModal/DeleteLicenseModal';
+import SeeLicensesModal from './Modals/SeeLicenseModal/SeeLicensesModal';
+
 
 interface CardProps {
   imageUrl: string | StaticImageData;
@@ -9,11 +13,12 @@ interface CardProps {
   razao: string,
   state: string,
   neighborhood: string,
+  companyId: number,
 }
 
-export const Card: React.FC<CardProps> = ({ imageUrl, companyName, neighborhood, state, cnpj, razao, city }) => {
+export const Card: React.FC<CardProps> = ({ imageUrl, companyName, neighborhood, state, cnpj, razao, city, companyId }) => {
 return (
-  <div className='h-auto bg-transparent relative z-0'>
+  <div className='h-auto bg-transparent relative z-0' id={`${companyId}`}>
     <div className="flex flex-col items-start mt-20 w-[365px] h-[390px] mx-auto bg-primary rounded-lg shadow-md overflow-hidden">
         <Image src={imageUrl} alt="Card Image" className="h-[111px] w-[111px] absolute top-8 bg-primary rounded-full top-0- left-1/2 transform -translate-x-1/2" width={111} height={111} />
 
@@ -49,17 +54,12 @@ return (
           </div>
 
           <div className='w-full flex p-2 flex-col gap-3 h-[90%] justify-between'>
-            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
-              Criar licença
-            </button>
 
-            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
-              Editar empresa
-            </button>
+            <CreateLicenceModal cta='Criar licença' />
 
-            <button className='uppercase p-1 bg-white text-primary rounded-sm'>
-              ver licença
-            </button>
+            <DeleteLicenseModal cta='Deletar empresa' empresaId={companyId}/>
+
+            <SeeLicensesModal cta='Ver licenças' empresaId={companyId}/>
           </div>
         </div>
       </section>  

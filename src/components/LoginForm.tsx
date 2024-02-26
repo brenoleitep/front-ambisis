@@ -45,10 +45,10 @@ export const LoginForm = () => {
       const response = await axios.post('https://api-ambisis.onrender.com/api/auth/login', data);
       localStorage.setItem('@userToken', response.data.token);
       router.push('/dashboard')
+      setIsLoading(false);
     } catch (error) {
       console.log('Erro ao enviar os dados:', error);
     } finally {
-      setIsLoading(false);
     }
   };
 

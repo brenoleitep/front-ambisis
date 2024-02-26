@@ -1,19 +1,12 @@
+'use client'
 import { normalizes } from '@/utils/normalizes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Dialog, DialogActions, DialogContent, TextField } from '@mui/material';
-import axios from 'axios';
 import { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { z } from 'zod';
 import { useCreateCompanyModal } from './useCreateCompanyModal';
-
-interface Field {
-  id: string;
-  label: string;
-  type: string;
-  required: boolean;
-  validation: any;
-}
 
 const schema = z.object({
   razao_social: z.string().min(3, 'Razão Social muito curta').max(100, 'Razão Social muito longa'),
@@ -29,10 +22,9 @@ interface ModalProps {
   cta: string;
 }
 
-export default function Modal({ cta }: ModalProps) {
-  const {handleClickOpen, handleClose, open} = useCreateCompanyModal();
+export default function CreateCompanyModal({ cta }: ModalProps) {
+  const {handleClickOpen, handleClose, open, isLoading, handleSubmitForm} = useCreateCompanyModal();
   const {normalizeCepNumber, normalizeCnpjNumber} = normalizes();
-
 
   const { handleSubmit, formState: { errors }, register, watch, setValue} = useForm({
     mode: "all",
@@ -60,26 +52,10 @@ export default function Modal({ cta }: ModalProps) {
     setValue("cep", normalizeCepNumber(cepValue))
   },[cepValue])
 
-  const handleSubmitForm = async (data: Record<string, string>) => {
-    try {
-      const token = localStorage.getItem('@userToken');
-      const config = {
-        headers: {
-          Authorization: `${token}`,
-        },
-      };
-      const response = await axios.post('https://api-ambisis.onrender.com/api/company/createCompany', data, config);
-      
-      if(response.status === 201) handleClose();
-    } catch (error) {
-      console.log('Erro de validação:', error);
-    } finally {
-    }
-  };
 
   return (
     <>
-      <button className='uppercase text-sm bg-primary p-2 text-white rounded-sm' onClick={handleClickOpen}>
+      <button className='uppercase p-1 bg-white text-primary rounded-sm' onClick={handleClickOpen}>
         {cta}
       </button>
       <Dialog
@@ -160,7 +136,9 @@ export default function Modal({ cta }: ModalProps) {
           />
         </DialogContent>
         <DialogActions>
-          <button className={`flex items-center justify-center mx-auto w-[92%] h-[60px] bg-primary rounded-lg text-2xl text-white`}>{cta}</button>
+          <button className={`flex items-center justify-center mx-auto w-[92%] h-[60px] bg-primary rounded-lg text-2xl text-white`}>      
+            {isLoading ? <AiOutlineLoading3Quarters className="animate-spin text-center" /> : cta}
+            </button>
         </DialogActions>
       </Dialog>
     </>
