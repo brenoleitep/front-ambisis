@@ -1,36 +1,56 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Projeto Ambisis
+![Ambisis](./public/logoAmbisis.png)
 
-## Getting Started
+Uma aplicação afim de simular um mini sistema de gerenciamento de empresas que possuem licenças ambientais. 
 
-First, run the development server:
+## Índice
+- <a href="#features">Funcionalidades do projeto</a> 
+- <a href="#demonstracao">Demonstração</a> 
+- <a href="#rodar">Como rodar o projeto</a> 
+- <a href="#layout">Layout</a> 
+  
+  ## 🧑‍💻 Funcionalidades do projeto
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+  - [x] Cadastro de usuário
+  - [x] Criação de empresa
+  - [x] Criação de licença
+  - [x] Deletar empresa
+  - [x] Leitura de licenças
+  - [x] Rotas protegidas
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+  ## 🧑‍💻 Layout
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+  - Login ![Login](image.png)
+  - Cadastro ![Cadastro](image-1.png)
+  - Criação de empresa ![alt text](image-2.png)
+  - Listagem de empresas ![alt text](image-3.png)
+  - Deletar empresas![alt text](image-4.png)
+  - Ver licenças![alt text](image-5.png)
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+  ## Demonstração
+  [Link para ver o projeto](https://front-ambisis.vercel.app/)
 
-## Learn More
+  ## Como rodar esse projeto? 
+  ```bash
+  # Clone esse repo
+  $ git clone linkrepo
 
-To learn more about Next.js, take a look at the following resources:
+  # Acesse a pasta do projeto
+  $ cd front-ambisis
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  # Instale as dependencias
+  $ npm install
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+  # Execute a aplicação
+  $ npm run dev
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+  # A Aplicação será iniciada na porta 3000, acesse pelo navegador: http://localhost:3000
+  ```
+ ## Techs, Frameworks e Libs utilizadas
+ 1. React
+ 2. NextJs
+ 3. React Hook Form
+ 4. Zod 
+ 5. Axios
+ 6. React-toastify
+ 7. Material UI
