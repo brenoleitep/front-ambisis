@@ -1,3 +1,4 @@
+'use client'
 import { APP_ROUTES } from "@/constants/app-routes";
 import { checkUserAuthenticated } from "@/functions/check-user-authenticated";
 import { useRouter } from "next/navigation";
