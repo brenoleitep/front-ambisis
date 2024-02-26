@@ -20,12 +20,12 @@ Uma aplicação afim de simular um mini sistema de gerenciamento de empresas que
 
   ## 🧑‍💻 Layout
 
-  - Login ![Login](image.png)
-  - Cadastro ![Cadastro](image-1.png)
-  - Criação de empresa ![alt text](image-2.png)
-  - Listagem de empresas ![alt text](image-3.png)
-  - Deletar empresas![alt text](image-4.png)
-  - Ver licenças![alt text](image-5.png)
+  - Login ![Login](/public/image.png)
+  - Cadastro ![Cadastro](/public/image-1.png)
+  - Criação de empresa ![alt text](/public/image-2.png)
+  - Listagem de empresas ![alt text](/public/image-3.png)
+  - Deletar empresas![alt text](/public/image-4.png)
+  - Ver licenças![alt text](/public/image-5.png)
 
   ## Demonstração
   [Link para ver o projeto](https://front-ambisis.vercel.app/)
