@@ -1,5 +1,7 @@
+'use client'
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import { useForm } from 'react-hook-form';
+import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useDeleteLicenseModal } from './useDeleteLicenseModal';
 
 interface ModalProps {
@@ -8,7 +10,7 @@ interface ModalProps {
 }
 
 export default function DeleteLicenseModal ({ cta, empresaId }: ModalProps) {
-  const { handleClose, handleClickOpen, open, handleSubmitForm } = useDeleteLicenseModal();
+  const { handleClose, isLoading, handleClickOpen, open, handleSubmitForm } = useDeleteLicenseModal();
   const { handleSubmit }  = useForm();
 
   return (
@@ -37,7 +39,7 @@ export default function DeleteLicenseModal ({ cta, empresaId }: ModalProps) {
 
         <DialogActions className='flex w-full justify-between'>
              <button className='uppercase w-full p-3 bg-primary text-white rounded-sm' onClick={handleSubmitForm}>
-              Deletar empresa
+            {isLoading ? <AiOutlineLoading3Quarters className="animate-spin text-center" /> : "Deletar empresa"}
             </button>             
           </DialogActions>
       </Dialog>

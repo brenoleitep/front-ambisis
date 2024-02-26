@@ -1,3 +1,4 @@
+'use client'
 import { normalizes } from '@/utils/normalizes';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Dialog, DialogActions, DialogContent, TextField } from '@mui/material';

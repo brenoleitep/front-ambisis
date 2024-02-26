@@ -38,5 +38,5 @@ export const useDeleteLicenseModal = () => {
     }
   };
 
-  return { open, setOpen, handleClose, handleClickOpen, handleSubmitForm };
+  return { open, isLoading, setOpen, handleClose, handleClickOpen, handleSubmitForm };
 };

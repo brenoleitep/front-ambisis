@@ -1,3 +1,4 @@
+'use client'
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useSeeLicenses } from './useSeeLicenses';
