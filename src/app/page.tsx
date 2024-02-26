@@ -6,7 +6,7 @@ import logoAmbisis from './../../public/logoAmbisis.png';
 const Login = () => {
 
   return (
-    <div className="h-screen gap-6 container flex flex-col justify-center items-center mx-auto">
+    <div className="h-screen gap-6 container flex flex-col justify-center mx-auto items-center mx-auto">
       {/* <TopImage /> */}
       <Image src={logoAmbisis} alt="Ambisis" />
       

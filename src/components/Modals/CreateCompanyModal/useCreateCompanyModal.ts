@@ -26,9 +26,9 @@ export const useCreateCompanyModal = () => {
         const response = await axios.post('https://api-ambisis.onrender.com/api/company/createCompany', data, config);
         toast("Empresa criada com sucesso!")
         if(response.status === 201) handleClose();
-      } catch (error) {
+      } catch (error: any) {
         console.log('Erro de validação:', error);
-        toast("Ocorreu algum erro!")
+        toast(error.response.data.message)
       } finally {
         setIsLoading(false)
       }

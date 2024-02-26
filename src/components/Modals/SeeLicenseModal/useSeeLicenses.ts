@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { MouseEvent, useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 
 interface License {
   id: number;
@@ -40,9 +41,10 @@ export const useSeeLicenses = () => {
         const response = await axios.get('https://api-ambisis.onrender.com/api/company/listcompany', config);
         const companyData = licenses.filter((company: any) => company.empresaId == companyId);
         setCompanies(companyData);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
-      }
+        toast(error.response.data.message)
+}
     };
 
     fetchData();
@@ -54,8 +56,9 @@ export const useSeeLicenses = () => {
         setIsLoading(true);
         const response = await axios.get(`https://api-ambisis.onrender.com/api/license/listLicense`, config);
         setLicenses(response.data.data);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Erro ao obter a lista de licenças:', error);
+        toast(error.response.data.message)
       } finally {
         setIsLoading(false);
       }

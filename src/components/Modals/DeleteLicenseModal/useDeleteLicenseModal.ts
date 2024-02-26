@@ -32,8 +32,9 @@ export const useDeleteLicenseModal = () => {
         handleClose();
       };
       toast("Empresa deletada com sucesso")
-    } catch (error) {
-      console.log('Erro de validação:', error);
+    } catch (error: any) {
+      console.log('Erro de validação:', error);   
+      toast(error.response.data.message)
     } finally {
       setIsLoading(false);
     }
