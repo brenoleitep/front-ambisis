@@ -1,4 +1,3 @@
-import { useDashboard } from '@/app/dashboard/useDashboard';
 import axios from 'axios';
 import { MouseEvent, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -9,7 +8,6 @@ export const useDeleteLicenseModal = () => {
   const [companyId, setCompanyId] = useState(0);
   const [zeroCompany, setZeroCompany] = useState(false);
 
-  const {updateCompanies} = useDashboard();
   const handleClickOpen = (e: MouseEvent<HTMLDivElement> | MouseEvent<HTMLButtonElement>) => {
     setOpen(true);
     setCompanyId(Number(e.currentTarget?.id));
@@ -35,7 +33,6 @@ export const useDeleteLicenseModal = () => {
       if(response.status === 200) {
         handleClose();
       };
-      updateCompanies();
       toast("Empresa deletada com sucesso")
     } catch (error: any) {
       console.log('Erro de validação:', error);   
