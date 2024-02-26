@@ -33,10 +33,8 @@ export default function Home() {
           }
         });
         
-        console.log(response.data)
         setCompanies(response.data.data);
         setIsLoading(false);
-        console.log(response.data)
       } catch (error) {
         setError('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
         setIsLoading(false);
@@ -67,6 +65,7 @@ export default function Home() {
               razao={company?.razao_social}
               neighborhood={company?.bairro} 
               state={company?.estado} 
+              companyId={company?.id}
             />
           ))
         )}
