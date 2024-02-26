@@ -51,6 +51,7 @@ export const useSeeLicenses = () => {
   useEffect(() => {
     const fetchLicenses = async () => {
       try {
+        setIsLoading(true);
         const response = await axios.get(`https://api-ambisis.onrender.com/api/license/listLicense`, config);
         setLicenses(response.data.data);
       } catch (error) {
@@ -61,7 +62,7 @@ export const useSeeLicenses = () => {
     };
 
     fetchLicenses();
-  }, [companyId, companies, licenses]);
+  }, [companyId]);
 
   return { companies, isLoading, open, setOpen, handleClose, handleClickOpen };
 };

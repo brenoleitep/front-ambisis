@@ -1,4 +1,5 @@
 'use client'
+import SkeletonChildren from '@/components/Skeleton';
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
 import { useSeeLicenses } from './useSeeLicenses';
@@ -30,6 +31,10 @@ export default function SeeLicensesModal({ cta, empresaId }: ModalProps) {
         <DialogContent className='flex flex-col gap-3 text-black'>
           <h2 className='text-2xl text-black'>{cta}</h2>
           {
+            isLoading ? 
+            <SkeletonChildren />
+            : companies.length === 0 ? "Não existem licenças disponíveis para essa empresa"
+            :
             companies.map((elem) => 
               <div className='flex bg-secondary p-1 text-white'>
                 <ul className='flex flex-col'>
