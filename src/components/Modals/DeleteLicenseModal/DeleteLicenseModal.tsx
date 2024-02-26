@@ -1,4 +1,5 @@
 'use client'
+import { useDashboard } from '@/app/dashboard/useDashboard';
 import { Dialog, DialogActions, DialogContent } from '@mui/material';
 import { useForm } from 'react-hook-form';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai';
@@ -12,6 +13,7 @@ interface ModalProps {
 export default function DeleteLicenseModal ({ cta, empresaId }: ModalProps) {
   const { handleClose, isLoading, handleClickOpen, open, handleSubmitForm } = useDeleteLicenseModal();
   const { handleSubmit }  = useForm();
+  const { companies } = useDashboard();
 
   return (
     <>
@@ -31,16 +33,27 @@ export default function DeleteLicenseModal ({ cta, empresaId }: ModalProps) {
         }}
       >
         <DialogContent className='flex flex-col gap-3 text-black'>
-          <h2 className='text-2xl text-black'>{cta}</h2>
+          <h2 className='text-2xl text-black'>{cta}</h2>    
           
-          <p>Você deseja realmente excluir essa empresa?</p>
+          {
+            companies?.data ? 
+            <p>Você deseja realmente excluir essa empresa?</p>
+            :
+            <p>Você precisa ter pelo menos uma empresa cadastrada!</p>
+          }
 
         </DialogContent>
 
         <DialogActions className='flex w-full justify-between'>
-             <button className='uppercase w-full p-3 bg-primary text-white rounded-sm' onClick={handleSubmitForm}>
-            {isLoading ? <AiOutlineLoading3Quarters className="animate-spin text-center" /> : "Deletar empresa"}
-            </button>             
+            
+              {
+                companies?.data ? 
+                <button className='uppercase w-full p-3 bg-primary text-white rounded-sm' onClick={handleSubmitForm}>
+                {isLoading ? <AiOutlineLoading3Quarters className="animate-spin text-center" /> : "Deletar empresa"}
+                </button>     
+                :
+                null
+              }           
           </DialogActions>
       </Dialog>
     </>

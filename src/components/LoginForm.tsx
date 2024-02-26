@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { toast } from 'react-toastify';
 import { z } from 'zod';
 import Button from './Button';
 
@@ -45,20 +46,23 @@ export const LoginForm = () => {
       const response = await axios.post('https://api-ambisis.onrender.com/api/auth/login', data);
       localStorage.setItem('@userToken', response.data.token);
       router.push('/dashboard')
+      toast("Login feito com sucesso")
       setIsLoading(false);
-    } catch (error) {
+    } catch (error: any) {
       console.log('Erro ao enviar os dados:', error);
+      toast(error.response.data.message)
     } finally {
+      setIsLoading(false)
     }
   };
 
   return (
     <>
-      <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col gap-5 w-[80%]">
+      <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col items-center gap-5 w-[100%]">
         
         <TextField 
         id="email" 
-        className='h-[65px] max-w-[343px]' 
+        className='h-[65px] w-[100%] max-w-[343px]' 
         label="Email" 
         variant="outlined" 
         {...register('email')} 

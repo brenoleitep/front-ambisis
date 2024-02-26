@@ -23,9 +23,10 @@ export const useCreateLicenceModal = () => {
       try {
         const response = await axios.get('https://api-ambisis.onrender.com/api/company/listcompany', config);
         setCompanies(response.data.data);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Erro ao obter a lista de empresas:', error);
-      }
+        toast(error.response.data.message)
+}
     };
     
     fetchCompanies();
@@ -57,9 +58,9 @@ export const useCreateLicenceModal = () => {
         handleClose()
         setShouldResetForm(true);
       };
-    } catch (error) {
+    } catch (error: any) {
       console.log('Erro de validação:', error);
-      toast("Ocorreu algum erro!")
+      toast(error.response.data.message)
     } finally {
       setIsLoading(false);
     }

@@ -8,6 +8,7 @@ import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { z } from 'zod';
 
+import { toast } from 'react-toastify';
 import Button from './Button';
 
 const schema = z.object({
@@ -48,15 +49,16 @@ export const RegisterForm = () => {
       setIsLoading(true);
       const response = await axios.post('https://api-ambisis.onrender.com/api/auth/cadastro', data);
       router.push('/');
-    } catch (error) {
+    } catch (error: any) {
       console.log('Erro ao enviar os dados:', error);
+      toast(error.response.data.message)
     } finally {
       setIsLoading(false);
     }
   };
 
   return (
-    <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col gap-1 w-[80%]">
+    <form onSubmit={handleSubmit(handleSubmitForm)} className="flex flex-col items-center gap-1 w-[100%]">
       <TextField
         id="name"
         label="Nome"
