@@ -1,5 +1,6 @@
 'use client'
 import { Card } from "@/components/Card";
+import SkeletonChildren from "@/components/Skeleton";
 import { useDashboard } from "./useDashboard";
 import logoAmbisis from "/public/logoAmbisis.png";
 
@@ -7,16 +8,18 @@ export default function Home() {
   const { companies, error, isLoading } = useDashboard();
 
   return (
-    <main>
+    <main className="min-h-[100vh]">
       <div className="flex flex-col gap-6">
-        <h2 className="mx-auto mt-3 text-2xl">Todas as empresas</h2>
 
         {isLoading ? (
-          <p>Carregando...</p>
+          <SkeletonChildren />
         ) : error ? (
           <p>{error}</p>
         ) : (
-          companies?.map(company => (
+          <>
+        <h2 className="mx-auto mt-3 text-2xl">Todas as empresas</h2>
+
+          {companies?.map(company => (
              <Card 
               key={company?.id}
               imageUrl={logoAmbisis} 
@@ -28,8 +31,11 @@ export default function Home() {
               state={company?.estado} 
               companyId={company?.id}
             />
-          ))
-        )}
+            ))
+          }
+          </>
+        )
+        }
       </div>
     </main>
   );
