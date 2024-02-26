@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const useCreateCompanyModal = () => {
   const [open, setOpen] = useState(false);
@@ -23,10 +24,11 @@ export const useCreateCompanyModal = () => {
           },
         };
         const response = await axios.post('https://api-ambisis.onrender.com/api/company/createCompany', data, config);
-        
+        toast("Empresa criada com sucesso!")
         if(response.status === 201) handleClose();
       } catch (error) {
         console.log('Erro de validação:', error);
+        toast("Ocorreu algum erro!")
       } finally {
         setIsLoading(false)
       }

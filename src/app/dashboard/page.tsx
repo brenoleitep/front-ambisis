@@ -1,5 +1,6 @@
 'use client'
 import { Card } from "@/components/Card";
+import CreateCompanyModal from "@/components/Modals/CreateCompanyModal/CreateCompanyModal";
 import SkeletonChildren from "@/components/Skeleton";
 import { useDashboard } from "./useDashboard";
 import logoAmbisis from "/public/logoAmbisis.png";
@@ -13,8 +14,11 @@ export default function Home() {
 
         {isLoading ? (
           <SkeletonChildren />
-        ) : error ? (
-          <p>{error}</p>
+        ) : companies.length === 0 ? (
+          <div className="mx-auto gap-2 h-[90vh] flex flex-col justify-center items-center">
+          <h2 className="uppercase text-primary">Você ainda não criou nenhuma empresa!</h2>
+          <CreateCompanyModal cta="Criar empresa" />
+          </div>
         ) : (
           <>
         <h2 className="mx-auto mt-3 text-2xl">Todas as empresas</h2>

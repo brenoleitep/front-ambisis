@@ -18,8 +18,7 @@ export const useDashboard = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-
- useEffect(() => {
+  useEffect(() => {
     const fetchData = async () => {
       try {
         const token = localStorage.getItem('@userToken');

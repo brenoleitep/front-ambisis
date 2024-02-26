@@ -59,6 +59,7 @@ export const useCreateLicenceModal = () => {
       };
     } catch (error) {
       console.log('Erro de validação:', error);
+      toast("Ocorreu algum erro!")
     } finally {
       setIsLoading(false);
     }

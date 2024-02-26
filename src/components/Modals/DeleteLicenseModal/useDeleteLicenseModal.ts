@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { MouseEvent, useState } from 'react';
+import { toast } from 'react-toastify';
 
 export const useDeleteLicenseModal = () => {
   const [open, setOpen] = useState(false);
@@ -30,7 +31,7 @@ export const useDeleteLicenseModal = () => {
       if(response.status === 200) {
         handleClose();
       };
-
+      toast("Empresa deletada com sucesso")
     } catch (error) {
       console.log('Erro de validação:', error);
     } finally {
