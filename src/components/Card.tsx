@@ -17,11 +17,12 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({ imageUrl, companyName, neighborhood, state, cnpj, razao, city, companyId }) => {
+  const imageDefault = "https://png.pngtree.com/png-vector/20190930/ourmid/pngtree-building-icon-isolated-on-abstract-background-png-image_1763153.jpg"
+
 return (
   <div className='h-auto bg-transparent relative z-0' id={`${companyId}`}>
     <div className="flex flex-col items-start mt-20 w-[365px] h-[390px] mx-auto bg-primary rounded-lg shadow-md overflow-hidden">
-        <Image src={imageUrl} alt="Card Image" className="h-[111px] w-[111px] absolute top-8 bg-primary rounded-full top-0- left-1/2 transform -translate-x-1/2" width={111} height={111} />
-
+        <Image src={imageUrl ? imageUrl : imageDefault} alt="Card Image" className="h-[111px] w-[111px] absolute top-8 bg-primary rounded-full top-0- left-1/2 transform -translate-x-1/2" width={111} height={111} />
       <section className='flex justify-end overflow-auto flex-col h-full mx-auto w-full p-2 text-white'>
         <h2 className='text-center p-2 w-full text-2xl'>{companyName}</h2>
         

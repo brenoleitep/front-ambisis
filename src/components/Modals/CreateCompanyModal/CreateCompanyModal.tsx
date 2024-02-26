@@ -12,9 +12,10 @@ const schema = z.object({
   razao_social: z.string().min(3, 'Razão Social muito curta').max(100, 'Razão Social muito longa'),
   cnpj: z.string().min(13, 'CNPJ deve ter 14 dígitos').max(18),
   cep: z.string().min(7, 'CEP deve ter 8 dígitos').max(9),
-  cidade: z.string(),
-  estado: z.string(),
-  bairro: z.string(),
+  cidade: z.string().min(3, 'Cidade muito curta'),
+  estado: z.string().min(1, 'Estado Social muito curta'),
+  bairro: z.string().min(3, 'Bairro muito curto'),
+  imageLink: z.string().min(3, 'Digite um link para o logo da sua empresa'),
   complemento: z.string().optional(),
 });
 
@@ -38,6 +39,7 @@ export default function CreateCompanyModal({ cta }: ModalProps) {
       estado: '',
       bairro: '',
       complemento: '',
+      imageLink: ''
     }
   });
 
@@ -72,6 +74,15 @@ export default function CreateCompanyModal({ cta }: ModalProps) {
       >
         <DialogContent className='flex flex-col gap-3'>
           <h2 className='text-2xl text-black'>{cta}</h2>
+          <TextField 
+            id="image" 
+            label="Logo da empresa" 
+            variant="outlined" 
+            {...register('imageLink')} 
+            error={!!errors?.imageLink} 
+            helperText={errors?.imageLink?.message} 
+            required
+          />
           <TextField 
             id="razao_social" 
             label="Razão Social" 

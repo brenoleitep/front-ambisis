@@ -35,22 +35,26 @@ export const useSeeLicenses = () => {
           },
         };
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await axios.get('https://api-ambisis.onrender.com/api/company/listcompany', config);
-        const companyData = licenses.filter((company: any) => company.empresaId == companyId);
-        setCompanies(companyData);
-      } catch (error: any) {
-        console.error('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
-        toast(error.response.data.message)
-}
-    };
+    useEffect(() => {
+      if(!companyId) return 
 
-    fetchData();
-  }, [companyId, companies, licenses]);      
-
+      const fetchData = async () => {
+        try {
+          const response = await axios.get('https://api-ambisis.onrender.com/api/company/listcompany', config);
+          const companyData = licenses.filter((company: any) => company.empresaId == companyId);
+          setCompanies(companyData);
+        } catch (error: any) {
+          console.error('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
+          toast(error.response.data.message)
+        }
+      };
+      
+      fetchData();
+    }, []);      
+  
+  
   useEffect(() => {
+    if(!companyId) return
     const fetchLicenses = async () => {
       try {
         setIsLoading(true);
@@ -58,14 +62,15 @@ export const useSeeLicenses = () => {
         setLicenses(response.data.data);
       } catch (error: any) {
         console.error('Erro ao obter a lista de licenças:', error);
-        toast(error.response.data.message)
+        // toast(error.response.data.message)
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchLicenses();
-  }, [companyId]);
+  }, []);
+  
 
   return { companies, isLoading, open, setOpen, handleClose, handleClickOpen };
 };
