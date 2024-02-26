@@ -1,7 +1,7 @@
 'use client'
 import { useFetch } from "@/service/useFetch";
 
-interface Company {
+interface CompanyData {
   id: number;
   razao_social: string;
   cnpj: string;
@@ -9,14 +9,18 @@ interface Company {
   cidade: string;
   estado: string;
   bairro: string;
-  imageUrl: string,
+  imageUrl: string;
   complemento: string | null;
+}
+
+interface Company {
+  data: CompanyData[];
 }
 
 export const useDashboard = () => {
 
   const token = localStorage.getItem('@userToken') ?? '';
-  const { data, error, isLoading } = useFetch<Company[]>('api/company/listcompany', token)
+  const { data, error, isLoading } = useFetch<Company>('api/company/listcompany', token)
   return {
       companies: data,
       isLoading,
