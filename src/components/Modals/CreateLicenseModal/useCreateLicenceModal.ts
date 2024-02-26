@@ -1,6 +1,7 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 
 
 export const useCreateLicenceModal = () => {
@@ -51,7 +52,7 @@ export const useCreateLicenceModal = () => {
       setIsLoading(true);
       
       const response = await axios.post(`https://api-ambisis.onrender.com/api/license/createLicense`, data, config);
-      console.log(response)
+      toast("Licença criada com sucesso")
       if(response.status === 201) {
         handleClose()
         setShouldResetForm(true);

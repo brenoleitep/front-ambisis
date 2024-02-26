@@ -4,6 +4,8 @@ import { PrivateRoute } from "@/components/PrivateRoute";
 import { checkIsPublicRoute } from "@/functions/check-is-public-route";
 import { Inter } from "next/font/google";
 import { usePathname } from "next/navigation";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -30,6 +32,7 @@ export default function RootLayout({
             <PrivateRoute>
               <Nav />
               {children}
+              <ToastContainer  />
             </PrivateRoute>
           )}
       </body>
