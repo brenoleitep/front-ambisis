@@ -15,11 +15,11 @@ export const useSeeLicenses = () => {
   const [open, setOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const [companies, setCompanies] = useState<License[]>([]);
-  const [companyId, setCompanyId] = useState('');
+  const [companyId, setCompanyId] = useState<number | null>(null);
 
-    const handleClickOpen = (e: MouseEvent<HTMLDivElement>) => {
+    const handleClickOpen = (e: MouseEvent<HTMLDivElement> | MouseEvent<HTMLButtonElement>) => {
     setOpen(true);
-    setCompanyId(e.currentTarget?.id)
+    setCompanyId(Number(e.currentTarget?.id));
     };
 
     const handleClose = () => {

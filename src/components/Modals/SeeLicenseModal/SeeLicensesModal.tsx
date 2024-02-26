@@ -9,7 +9,7 @@ interface ModalProps {
 
 export default function SeeLicensesModal({ cta, empresaId }: ModalProps) {
   const {isLoading, companies, handleClose, handleClickOpen, open} = useSeeLicenses();
-  
+
   return (
     <>
       <button className='uppercase p-1 bg-white text-primary rounded-sm' id={`${empresaId}`} onClick={handleClickOpen}>
@@ -41,7 +41,7 @@ export default function SeeLicensesModal({ cta, empresaId }: ModalProps) {
           )}
         </DialogContent>
         <DialogActions>
-          <button className={`flex items-center justify-center mx-auto w-[92%] h-[60px] bg-primary rounded-lg text-2xl text-white`}>
+          <button type='reset' onClick={handleClose} className={`flex items-center justify-center mx-auto w-[92%] h-[60px] bg-primary rounded-lg text-2xl text-white`}>
             {isLoading ? <AiOutlineLoading3Quarters className="animate-spin text-center" /> : "Voltar"}
           </button>
         </DialogActions>
