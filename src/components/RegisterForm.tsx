@@ -48,6 +48,7 @@ export const RegisterForm = () => {
     try {
       setIsLoading(true);
       const response = await axios.post('https://api-ambisis.onrender.com/api/auth/cadastro', data);
+      toast("Cadastro feito com sucesso")
       router.push('/');
     } catch (error: any) {
       console.log('Erro ao enviar os dados:', error);

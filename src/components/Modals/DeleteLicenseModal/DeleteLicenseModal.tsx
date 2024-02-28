@@ -36,10 +36,10 @@ export default function DeleteLicenseModal ({ cta, empresaId }: ModalProps) {
           <h2 className='text-2xl text-black'>{cta}</h2>    
           
           {
-            companies?.data ? 
+            companies?.data && companies?.data.length > 1 ? 
             <p>Você deseja realmente excluir essa empresa?</p>
             :
-            <p>Você precisa ter pelo menos uma empresa cadastrada!</p>
+            <p>Você precisa ter pelo menos duas empresas cadastradas!</p>
           }
 
         </DialogContent>
@@ -47,7 +47,7 @@ export default function DeleteLicenseModal ({ cta, empresaId }: ModalProps) {
         <DialogActions className='flex w-full justify-between'>
             
               {
-                companies?.data ? 
+                companies?.data && companies?.data.length > 1 ? 
                 <button className='uppercase w-full p-3 bg-primary text-white rounded-sm' onClick={handleSubmitForm}>
                 {isLoading ? <AiOutlineLoading3Quarters className="animate-spin text-center" /> : "Deletar empresa"}
                 </button>     

@@ -50,7 +50,7 @@ export const LoginForm = () => {
       setIsLoading(false);
     } catch (error: any) {
       console.log('Erro ao enviar os dados:', error);
-      toast(error.response.data.message)
+      toast("Usuário ou senha incorretos")
     } finally {
       setIsLoading(false)
     }
