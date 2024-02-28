@@ -27,6 +27,7 @@ export const useSeeLicenses = () => {
       setOpen(false);
     };
 
+    console.log(companyId)
 
   const token = localStorage.getItem('@userToken');
         const config = {
@@ -35,13 +36,12 @@ export const useSeeLicenses = () => {
           },
         };
 
+  const companyData = licenses.filter((company: any) => company.empresaId == companyId);
     useEffect(() => {
-      if(!companyId) return 
 
       const fetchData = async () => {
         try {
           const response = await axios.get('https://api-ambisis.onrender.com/api/company/listcompany', config);
-          const companyData = licenses.filter((company: any) => company.empresaId == companyId);
           setCompanies(companyData);
         } catch (error: any) {
           console.error('Erro ao carregar os dados. Por favor, tente novamente mais tarde.');
@@ -50,26 +50,26 @@ export const useSeeLicenses = () => {
       };
       
       fetchData();
-    }, []);      
+    }, [companyId]);      
   
   
   useEffect(() => {
-    if(!companyId) return
     const fetchLicenses = async () => {
       try {
         setIsLoading(true);
         const response = await axios.get(`https://api-ambisis.onrender.com/api/license/listLicense`, config);
         setLicenses(response.data.data);
+        toast("Licença criada com sucesso")
       } catch (error: any) {
         console.error('Erro ao obter a lista de licenças:', error);
-        // toast(error.response.data.message)
+        toast(error.response.data.message)
       } finally {
         setIsLoading(false);
       }
     };
 
     fetchLicenses();
-  }, []);
+  }, [companyId]);
   
 
   return { companies, isLoading, open, setOpen, handleClose, handleClickOpen };
