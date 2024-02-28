@@ -15,7 +15,6 @@ const schema = z.object({
   cidade: z.string().min(3, 'Cidade muito curta'),
   estado: z.string().min(1, 'Estado Social muito curta'),
   bairro: z.string().min(3, 'Bairro muito curto'),
-  imageLink: z.string().min(3, 'Digite um link para o logo da sua empresa'),
   complemento: z.string().optional(),
 });
 
@@ -39,7 +38,6 @@ export default function CreateCompanyModal({ cta }: ModalProps) {
       estado: '',
       bairro: '',
       complemento: '',
-      imageLink: ''
     }
   });
 
@@ -74,15 +72,7 @@ export default function CreateCompanyModal({ cta }: ModalProps) {
       >
         <DialogContent className='flex flex-col gap-3'>
           <h2 className='text-2xl text-black'>{cta}</h2>
-          <TextField 
-            id="image" 
-            label="Logo da empresa" 
-            variant="outlined" 
-            {...register('imageLink')} 
-            error={!!errors?.imageLink} 
-            helperText={errors?.imageLink?.message} 
-            required
-          />
+
           <TextField 
             id="razao_social" 
             label="Razão Social" 
