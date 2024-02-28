@@ -10,7 +10,7 @@ interface ModalProps {
 }
 
 export default function SeeLicensesModal({ cta, empresaId }: ModalProps) {
-  const {isLoading, companies, handleClose, handleClickOpen, open} = useSeeLicenses();
+  const {isLoading, companyData, handleClose, handleClickOpen, open} = useSeeLicenses();
 
   return (
     <>
@@ -33,9 +33,9 @@ export default function SeeLicensesModal({ cta, empresaId }: ModalProps) {
           {
             isLoading ? 
             <SkeletonChildren />
-            : companies.length === 0 ? "Não existem licenças disponíveis para essa empresa"
+            : companyData?.length === 0 ? "Não existem licenças disponíveis para essa empresa"
             :
-            companies.map((elem) => 
+            companyData?.map((elem) => 
               <div className='flex bg-secondary p-1 text-white'>
                 <ul className='flex flex-col'>
                   <li>Orgão Ambiental: {elem.orgao_ambiental}</li>
