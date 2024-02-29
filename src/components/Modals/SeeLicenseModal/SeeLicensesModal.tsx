@@ -10,7 +10,7 @@ interface ModalProps {
 }
 
 export default function SeeLicensesModal({ cta, empresaId }: ModalProps) {
-  const {isLoading, companyData, handleClose, handleClickOpen, open} = useSeeLicenses();
+  const {isLoading, companyData, handleClose, handleClickOpen, removerTEmDiante, open} = useSeeLicenses();
 
   return (
     <>
@@ -39,8 +39,8 @@ export default function SeeLicensesModal({ cta, empresaId }: ModalProps) {
               <div className='flex bg-secondary p-1 text-white'>
                 <ul className='flex flex-col'>
                   <li>Orgão Ambiental: {elem.orgao_ambiental}</li>
-                  <li>Emissão: {elem.emissao}</li>
-                  <li>Validade: {elem.validade}</li>
+                  <li>Emissão: {removerTEmDiante(elem.emissao)}</li>
+                  <li>Validade: {removerTEmDiante(elem.validade)}</li>
                   <li>Número: {elem.numero}</li>
                 </ul>
               </div>

@@ -29,6 +29,16 @@ interface Company {
   data: CompanyData[];
 }
 
+function removerTEmDiante(data: string) {
+  if (!/^(\d{4}-\d{2}-\d{2})T(\d{2}:\d{2}:\d{2}.\d{3})Z$/.test(data)) {
+    return "Formato de data inválido";
+  }
+
+  const partes = data.split("T");
+
+  return partes[0];
+}
+
 export const useSeeLicenses = () => {
   const [open, setOpen] = useState(false);
   const [companyId, setCompanyId] = useState<number | null>(null);
@@ -48,5 +58,5 @@ export const useSeeLicenses = () => {
   
   const companyData = data?.data.filter((license) => license.empresaId == companyId);
 
-  return { companyData, isLoading, open, setOpen, handleClose, handleClickOpen };
+  return { companyData, isLoading, open, removerTEmDiante, setOpen, handleClose, handleClickOpen };
 };
